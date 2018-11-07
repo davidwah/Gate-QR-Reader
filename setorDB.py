@@ -1,15 +1,12 @@
 import mysql.connector
 import json
 
-
-
 ### Fungsi untuk kirim ke database ###
-
 ### Gerbang Masuk ###
 def MQTT_Topic_GerbangMasuk(jsonData):
     json_Dict = json.loads(jsonData)
     dataMasuk = json_Dict['data_Masuk'] 
-        
+    
     # Koneksi dan kirim data ke Database
     connection = mysql.connector.connect(host='192.168.xxx.xxx',
                              database='ooo',
