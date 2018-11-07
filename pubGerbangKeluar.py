@@ -15,7 +15,7 @@ proc.init(device)
 
 
 #### Koneksi MQTT ####
-MQTT_Broker = "192.168.1.100"
+MQTT_Broker = "192.168.xxx.xxx"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
 MQTT_Topic_GerbangMasuk = "parkir/pintuMasuk"
