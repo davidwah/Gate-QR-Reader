@@ -5,21 +5,25 @@ import zbar
 from sys import argv
 
 
+
 ### Fungsi dari Zbar ###
 proc = zbar.Processor()
 proc.parse_config('enable')
-device = '/dev/video0' #Sesuaikan dengan port device
+device = '/dev/video0'		#sesuaikan dengan port device
 if len(argv) > 1:
     	device =argv[1]
 proc.init(device)
 
 
 #### Koneksi MQTT ####
-MQTT_Broker = "192.168.xxx.xxx" 
+MQTT_Broker =  "192.168.1.102"
 MQTT_Port = 1883
 Keep_Alive_Interval = 45
+
 MQTT_Topic_GerbangMasuk = "parkir/pintuMasuk"
 MQTT_Topic_GerbangKeluar = "parkir/pintuKeluar"
+MQTT_Topic_palangMasuk = "parkir/palangMasuk"
+MQTT_Topic_palangKeluar = "parkir/palangKeluar"
 
 
 ####
@@ -60,9 +64,9 @@ def kirim_data_MQTT(proc, image, closure):
    		data_Masuk['data_Masuk'] = data_masukInput
    		data_json_masuk = json.dumps(data_Masuk)
 
-	   	print "Data masuk yang terkirim: "+ str(data_masukInput)
+	   	print "Data masuk yang terkirim: " + str(data_masukInput)
    		publish_To_Topic (MQTT_Topic_GerbangMasuk, data_json_masuk)
-		publish_To_Topic (MQTT_Topic_GerbangMasuk, 1)
+		publish_To_Topic (MQTT_Topic_palangMasuk, 1)
 
 proc.set_data_handler(kirim_data_MQTT)
 proc.visible = True
@@ -72,3 +76,4 @@ try:
     proc.user_wait()
 except zbar.WindowClosed, e:
 	pass
+
