@@ -12,7 +12,7 @@ def MQTT_Topic_GerbangMasuk(jsonData):
         
     #Koneksi dan kirim data ke Database
     connection = mysql.connector.connect(host='localhost',
-                             database='testDB',
+                             database='coba_login',
                              user='david',
                              password='admin')                 
     mycursor = connection.cursor()
@@ -34,7 +34,7 @@ def MQTT_Topic_GerbangKeluar(jsonData):
 
     #Koneksi dan kirim data ke Database
     connection = mysql.connector.connect(host='localhost',
-                             database='testDB',
+                             database='coba_login',
                              user='',
                              password='')                           
     mycursor = connection.cursor(True)
@@ -47,7 +47,7 @@ def MQTT_Topic_GerbangKeluar(jsonData):
 
     print "Input anda masuk pada database"
 
-    sql_up = "UPDATE user set saldo = saldo - 5000 where user.username='%s' " % username
+    sql_up = "UPDATE users set saldo = saldo - 5000 where users.username='%s' " % username
     mycursor.execute(sql_up)
     connection.commit()
     # return
